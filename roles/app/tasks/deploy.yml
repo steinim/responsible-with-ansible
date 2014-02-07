@@ -1,0 +1,37 @@
+---
+- name: install java
+  apt:
+    pkg=openjdk-7-jdk
+    state=installed
+
+#- name: download jar
+#  get_url:
+#    url="https://github.com/steinim/responsible-with-ansible/files/devops.jar"
+#    dest="/home/{{ user }}/devops.jar"
+#    owner={{ user }}
+#    group={{ group }}
+#    mode=0644
+
+- name: copy app jar
+  copy:
+    src=../../../helloworld-java-app/target/helloworld-java-app-1.0-SNAPSHOT-jar-with-dependencies.jar
+    dest=/home/{{ user }}/devops.jar
+    owner={{ user }}
+    group={{ group }}
+    mode=0755
+
+- name: copy init script to server
+  copy:
+    src=init.sh
+    dest=/etc/init.d/devops
+    owner={{ user }}
+    group={{ group }}
+    mode=0755
+
+- name: install service
+  service:
+    name=devops
+    enabled=yes
+  notify:
+    - restart devops
+

@@ -1,0 +1,18 @@
+---
+
+- hosts: dbservers
+  roles:
+    - common
+    - db
+
+- hosts: appservers
+  roles:
+    - common
+    - users
+    - app
+
+- hosts: proxies
+  roles:
+    - common
+    - nginx
+

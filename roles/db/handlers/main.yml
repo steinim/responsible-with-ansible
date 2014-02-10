@@ -1,0 +1,6 @@
+---
+
+- name: restart mysql
+  action: service name=mysql state=restarted enabled=yes
+  tags:
+    - db

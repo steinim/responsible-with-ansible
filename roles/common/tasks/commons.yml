@@ -10,11 +10,14 @@
   apt: upgrade=yes
 
 - name: Install additional packages
-  apt: package="{{ item }}"
+  apt:
+    package="{{ item }}"
     state=present
   with_items:
     - unzip
     - vim
+    - python-mysqldb
+    - mysql-client
 
 - name: Update /etc/hosts
   lineinfile:

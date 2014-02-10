@@ -65,8 +65,7 @@ LogLevel QUIET
 
 Provision with Ansible
 =======================
-Run: ```ansible-playbook --ask-sudo-pass play.yml```
-With parameters: ```ansible-playbook --ask-sudo-pass play.yml```
+Run: ```ansible-playbook -i hosts --private-key=~/.vagrant.d/insecure_private_key -u vagrant site.yml```
 
 Getting started
 ----------------

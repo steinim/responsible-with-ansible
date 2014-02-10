@@ -29,5 +29,5 @@
     owner={{ user }}
     group={{ group }}
     mode=600
-    regexp=^WILL_NOT_MATCH
+    regexp=stein.inge.morisbak@BEKK.no$
 

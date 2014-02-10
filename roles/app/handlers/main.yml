@@ -1,4 +1,6 @@
 - name: restart devops
+  sudo: True
+  remote_user: "{{ user }}"
   service:
     name=devops
     state=restarted

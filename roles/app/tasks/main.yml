@@ -1,2 +1,3 @@
 ---
+- include: migrate_db.yml
 - include: deploy.yml

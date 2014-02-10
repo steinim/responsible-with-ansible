@@ -2,6 +2,8 @@ package no.bekk.jersey.resources;
 
 import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 
+import java.net.InetAddress;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -21,7 +23,7 @@ public class RootResource {
 	@GET
 	@Produces(TEXT_PLAIN)
 	public Response ping() throws Exception {
-		return Response.ok("I'm alive :) " + dbAccess.sayHello()).build();
+		return Response.ok("App says: I'm alive on "+ InetAddress.getLocalHost().getHostName() +" :)\n\nDB says: " + dbAccess.sayHello()).build();
 	}
 
 }

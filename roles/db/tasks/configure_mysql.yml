@@ -7,11 +7,6 @@
   tags:
     - db
 
-- name: restart mysql
-  action: service name=mysql state=restarted enabled=yes
-  tags:
-    - db
-
 - name: update mysql root password
   mysql_user: name=root host={{ item }} password={{ mysql_root_password }} priv=*.*:ALL,GRANT
   with_items:

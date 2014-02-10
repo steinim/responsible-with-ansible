@@ -1,3 +1,6 @@
 .vagrant
 box
 helloworld-java-app/target
+helloworld-java-app/.classpath
+helloworld-java-app/.project
+helloworld-java-app/.settings/

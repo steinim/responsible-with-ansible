@@ -4,6 +4,23 @@
     pkg=openjdk-7-jdk
     state=installed
 
+- name: copy init script to server
+  copy:
+    src=init.sh
+    dest=/etc/init.d/devops
+    owner={{ user }}
+    group={{ group }}
+    mode=0755
+  tags:
+    - deploy
+
+- name: install service
+  service:
+    name=devops
+    enabled=yes
+  tags:
+    - deploy
+
 #- name: download jar
 #  get_url:
 #    url="https://github.com/steinim/responsible-with-ansible/files/devops.jar"
@@ -19,19 +36,9 @@
     owner={{ user }}
     group={{ group }}
     mode=0755
-
-- name: copy init script to server
-  copy:
-    src=init.sh
-    dest=/etc/init.d/devops
-    owner={{ user }}
-    group={{ group }}
-    mode=0755
-
-- name: install service
-  service:
-    name=devops
-    enabled=yes
+    backup=yes
+  tags:
+    - deploy
   notify:
     - restart devops
 

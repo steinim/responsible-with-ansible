@@ -5,7 +5,7 @@
     - deploy
 
 - name: Run db migration script
-  shell: "cat /tmp/migrate_db.sql | mysql -u{{ mysql_user }} -p{{ mysql_user_password }} -h{{ dbserver }} {{ mysql_user }}"
+  shell: "cat /tmp/migrate_db.sql | mysql -u{{ mysql_user }} -p{{ mysql_user_password }} -hlocalhost {{ mysql_user }}"
   tags:
     - deploy
 

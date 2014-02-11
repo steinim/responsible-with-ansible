@@ -3,9 +3,11 @@
 - hosts: dbservers
   roles:
     - common
+    - mysql
     - db
 
 - hosts: appservers
+  serial: 1
   roles:
     - common
     - users

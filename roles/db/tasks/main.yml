@@ -1,3 +1,2 @@
 ---
-- include: install_mysql.yml
-- include: configure_mysql.yml
+- include: migrate_db.yml

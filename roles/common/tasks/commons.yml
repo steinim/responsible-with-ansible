@@ -1,24 +1,5 @@
 ---
 
-- name: Update apt keys
-  command: apt-key update
-
-- name: Update apt cache
-  apt: update_cache=yes
-
-- name: Upgrade apt cache
-  apt: upgrade=yes
-
-- name: Install additional packages
-  apt:
-    package="{{ item }}"
-    state=present
-  with_items:
-    - unzip
-    - vim
-    - python-mysqldb
-    - mysql-client
-
 - name: Update /etc/hosts
   lineinfile:
     dest=/etc/hosts
@@ -33,3 +14,18 @@
     - { ip: '192.168.101.12', hostname: 'app2' }
     - { ip: '192.168.101.13', hostname: 'proxy' }
 
+- name: Add Google DNS server
+  lineinfile:
+    dest=/etc/resolvconf/resolv.conf.d/base
+    regexp="^nameserver 8.8.8.8$"
+    line="nameserver 8.8.8.8"
+    state=present
+
+- name: Update apt keys
+  command: apt-key update
+
+- name: Update apt cache
+  apt: update_cache=yes
+
+- name: Upgrade apt cache
+  apt: upgrade=yes

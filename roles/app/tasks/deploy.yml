@@ -15,6 +15,14 @@
     - deploy
 
 - name: touch logs
+  command: "touch /home/{{ user }}/logs/{{ item }}"
+  with_items:
+    - stderr.log
+    - stdout.log
+  tags:
+    - deploy
+
+- name: set ownership and mode on logs
   file:
     path="/home/{{ user }}/logs/{{ item }}"
     state=file

@@ -15,12 +15,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     db.vm.network "forwarded_port", guest: 3306, host: 3306, auto_correct: true
     db.vm.hostname = "db.local"
 
-    db.vm.provision "ansible" do |ansible|
-      ansible.playbook = "site.yml"
-      ansible.inventory_path = "hosts"
-      ansible.host_key_checking = "false"
-      ansible.limit = "db.local"
-    end
+    #db.vm.provision "ansible" do |ansible|
+    #  ansible.playbook = "site.yml"
+    #  ansible.inventory_path = "hosts"
+    #  ansible.host_key_checking = "false"
+    #  ansible.limit = "db.local"
+    #end
 
   end
 
@@ -29,12 +29,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     app1.vm.network "forwarded_port", guest: 1234, host: 1234, auto_correct: true
     app1.vm.hostname = "app1.local"
 
-    app1.vm.provision "ansible" do |ansible|
-      ansible.playbook = "site.yml"
-      ansible.inventory_path = "hosts"
-      ansible.host_key_checking = "false"
-      ansible.limit = "app1.local"
-    end
+    #app1.vm.provision "ansible" do |ansible|
+    #  ansible.playbook = "site.yml"
+    #  ansible.inventory_path = "hosts"
+    #  ansible.host_key_checking = "false"
+    #  ansible.limit = "app1.local"
+    #end
 
   end
 
@@ -43,12 +43,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     app2.vm.network "forwarded_port", guest: 1234, host: 1234, auto_correct: true
     app2.vm.hostname = "app2.local"
 
-    app2.vm.provision "ansible" do |ansible|
-      ansible.playbook = "site.yml"
-      ansible.inventory_path = "hosts"
-      ansible.host_key_checking = "false"
-      ansible.limit = "app2.local"
-    end
+    #app2.vm.provision "ansible" do |ansible|
+    #  ansible.playbook = "site.yml"
+    #  ansible.inventory_path = "hosts"
+    #  ansible.host_key_checking = "false"
+    #  ansible.limit = "app2.local"
+    #end
 
   end
 
@@ -58,12 +58,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     proxy.vm.network "forwarded_port", guest: 443, host: 4430, auto_correct: true
     proxy.vm.hostname = "proxy.local"
 
-    proxy.vm.provision "ansible" do |ansible|
-      ansible.playbook = "site.yml"
-      ansible.inventory_path = "hosts"
-      ansible.host_key_checking = "false"
-      ansible.limit = "proxy.local"
-    end
+    #proxy.vm.provision "ansible" do |ansible|
+    #  ansible.playbook = "site.yml"
+    #  ansible.inventory_path = "hosts"
+    #  ansible.host_key_checking = "false"
+    #  ansible.limit = "proxy.local"
+    #end
   end
 
 end

@@ -1,7 +1,8 @@
 ---
+
 - name: Create config for nginx
-  copy:
-    src=devops.conf
+  template:
+    src=devops.conf.j2
     dest=/etc/nginx/conf.d/devops.conf
     owner=root
     mode=0644

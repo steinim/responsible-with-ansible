@@ -1,6 +1,7 @@
 upstream backend  {
-  server app1.local:1234;
-  server app2.local:1234;
+  {% for appserver in groups.appservers %}
+  server {{ appserver }}:{{ app_port }};
+  {% endfor %}
 }
  
 server {

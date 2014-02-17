@@ -8,3 +8,8 @@
 
 - name: Upgrade apt cache
   apt: upgrade=yes
+
+- name: ensure installed vim
+  apt:
+    pkg=vim
+    state=installed

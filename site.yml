@@ -17,6 +17,6 @@
   vars:
     - app_port: "1234"
   roles:
-    #- common
+    - common
     - nginx
 

@@ -1,22 +1,26 @@
 #!/bin/sh
 
-APPUSER=devops
-APP_HOME=/home/$APPUSER
+APP_HOME=/home/devops
 APP_JAR=current
 LOGS=$APP_HOME/logs
 
-PID=$( ps -ea -o "pid ppid args" | grep -v grep | grep "java -jar current" | sed -e 's/^  *//' -e 's/ .*//' | head -1 )
+USR=$( whoami )
+
+PID=$( ps -ea -o "pid ppid args" | grep -v grep | grep "java -jar $APP_JAR" | sed -e 's/^  *//' -e 's/ .*//' | head -1 )
 
 _start() {
   if [ -z $PID ]; then
     echo "Starting devops..."
     cd $APP_HOME
-    /bin/su -l $APPUSER -c "nohup java -jar $APP_JAR 1>$LOGS/stdout.log 2>$LOGS/stderr.log &"
-    PID=$( ps -ea -o "pid ppid args" | grep -v grep | grep "java -jar devops.jar" | sed -e 's/^  *//' -e 's/ .*//' | head -1 )
+    if [ "devops" = "$USR" ]; then
+      sh -x "nohup java -jar $APP_JAR 1>$LOGS/stdout.log 2>$LOGS/stderr.log &"
+    else
+      /bin/su devops -c "nohup java -jar $APP_JAR 1>$LOGS/stdout.log 2>$LOGS/stderr.log &"
+    fi
     cd -
-    echo "Started devops with PID: $PID"
+    echo "Started devops."
   else
-    echo "devops already running"
+    echo "devops already running with PID: ${PID}"
   fi
 }
 
@@ -43,6 +47,7 @@ case "$1" in
     ;;
   restart)
     _stop
+    wait 3
     _start
     ;;
   status)

@@ -1,0 +1,10 @@
+---
+
+- name: Update apt keys
+  command: apt-key update
+
+- name: Update apt cache
+  apt: update_cache=yes
+
+- name: Upgrade apt cache
+  apt: upgrade=yes

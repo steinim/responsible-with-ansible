@@ -1,14 +1,10 @@
 ---
 
-- name: Create {{ group }}
-  group: name={{ group }}
-
 - name: Create {{ user }} account
   user:
     name={{ user }}
     comment="{{ user_name }}"
     group={{ group }}
-    groups=sudo
     createhome=yes
     home=/home/{{ user }}
     shell=/bin/bash
@@ -33,5 +29,5 @@
     owner={{ user }}
     group={{ group }}
     mode=600
-    regexp=^WILL_NOT_MATCH
+    regexp=stein.inge.morisbak@BEKK.no$
 

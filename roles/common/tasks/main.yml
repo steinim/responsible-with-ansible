@@ -1,2 +1,3 @@
 ---
-- include: commons.yml
+- include: dns.yml
+- include: apt.yml

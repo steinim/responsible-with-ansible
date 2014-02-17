@@ -1,5 +1,8 @@
 ---
 
+- name: Create group {{ group }}
+  group: name={{ group }} state=present
+
 - name: Create {{ user }} account
   user:
     name={{ user }}

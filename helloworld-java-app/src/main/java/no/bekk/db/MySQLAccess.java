@@ -24,11 +24,9 @@ public class MySQLAccess {
 		dbServer = System.getProperty("db.server");
 		tablename = System.getProperty("db.tablename");
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
 			String dbUrl = "jdbc:mysql://" + dbServer +"/" + schema + "?user="+ user + "&password=" + password;
-			System.out.println("Connecting to database: " + dbUrl);
 			connect = DriverManager.getConnection(dbUrl);
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -43,6 +41,7 @@ public class MySQLAccess {
 			}
 			return message + " :)";
 		} catch (Exception e) {
+                        e.printStackTrace();
 			return "nothing :(";
 		} finally {
 			close();

@@ -13,7 +13,7 @@ _start() {
     echo "Starting devops..."
     cd $APP_HOME
     if [ "devops" = "$USR" ]; then
-      sh -x "nohup java -jar $APP_JAR 1>$LOGS/stdout.log 2>$LOGS/stderr.log &"
+      nohup java -jar $APP_JAR 1>$LOGS/stdout.log 2>$LOGS/stderr.log &
     else
       /bin/su devops -c "nohup java -jar $APP_JAR 1>$LOGS/stdout.log 2>$LOGS/stderr.log &"
     fi

@@ -51,7 +51,6 @@ public class WebServerMain {
 			for(Entry<Object, Object> e : props.entrySet()) {
 				System.setProperty(e.getKey().toString(), e.getValue().toString());
 	        }
-			//System.setProperty("tablename", props.getProperty("tablename"));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		} finally {

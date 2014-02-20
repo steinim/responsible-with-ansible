@@ -3,20 +3,12 @@
 - hosts: dbservers
   roles:
     - common
-    - mysql
-    - db
 
 - hosts: appservers
-  serial: 1
   roles:
     - common
-    - users
-    - app
 
 - hosts: proxies
-  vars:
-    - app_port: "1234"
   roles:
     - common
-    - nginx
 

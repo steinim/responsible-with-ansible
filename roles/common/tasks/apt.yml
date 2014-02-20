@@ -9,13 +9,3 @@
 - name: Upgrade apt cache
   apt: upgrade=yes
 
-- name: ensure installed vim
-  apt:
-    pkg=vim
-    state=installed
-
-- name: set filetype indent off
-  lineinfile:
-    dest=/etc/vim/vimrc
-    line='filetype indent off'
-    state=present

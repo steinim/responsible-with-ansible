@@ -1,0 +1,120 @@
+---
+- name: install java
+  apt:
+    pkg=openjdk-7-jdk
+    state=installed
+
+- name: create log directory
+  file:
+    path="/home/{{ user }}/logs"
+    state=directory
+    owner={{ user }}
+    group={{ group }}
+    mode=0755
+  tags:
+    - deploy
+
+- name: touch logs
+  command: "touch /home/{{ user }}/logs/{{ item }}"
+  with_items:
+    - stderr.log
+    - stdout.log
+  tags:
+    - deploy
+
+- name: set ownership and mode on logs
+  file:
+    path="/home/{{ user }}/logs/{{ item }}"
+    state=file
+    owner={{ user }}
+    group={{ group }}
+    mode=0600
+  with_items:
+    - stderr.log
+    - stdout.log
+  tags:
+    - deploy
+
+- name: copy init script to server
+  copy:
+    src=init.sh
+    dest=/etc/init.d/devops
+    owner={{ user }}
+    group={{ group }}
+    mode=0755
+  notify:
+    - restart devops
+  tags:
+    - deploy
+
+- name: install service
+  service:
+    name=devops
+    enabled=yes
+  tags:
+    - deploy
+
+- name: copy config.properties
+  template:
+    src=config.properties.j2
+    dest=/home/{{ user }}/config.properties
+    owner={{ user }}
+    group={{ group }}
+    mode=0640
+  notify:
+    - restart devops
+  tags:
+    - deploy
+
+#- name: download jar
+#  get_url:
+#    url="https://github.com/steinim/responsible-with-ansible/files/devops.jar"
+#    dest="/home/{{ user }}/devops_{{ deploy_stamp }}.jar"
+#    owner={{ user }}
+#    group={{ group }}
+#    mode=0644
+#  notify:
+#    - restart devops
+#  tags:
+#    - deploy
+
+
+- name: copy app jar
+  copy:
+    src=../../../helloworld-java-app/target/helloworld-java-app-1.0-SNAPSHOT-jar-with-dependencies.jar
+    dest=/home/{{ user }}/devops_{{ deploy_stamp }}.jar
+    owner={{ user }}
+    group={{ group }}
+    mode=0644
+  tags:
+    - deploy
+
+- stat: path="/home/{{ user }}/current"
+  register: current
+  tags:
+    - deploy
+
+- name: link to previous app releases
+  shell: "ln -nsf $( readlink /home/{{ user }}/current ) /home/{{ user }}/previous"
+  when: current.stat.islink is defined and current.stat.islink == true
+  tags:
+    - deploy
+
+- name: link to current app releases
+  file:
+    dest="/home/{{ user }}/current"
+    src="/home/{{ user }}/devops_{{ deploy_stamp }}.jar"
+    owner={{ user }}
+    group={{ group }}
+    state=link
+    force=yes
+  notify:
+    - restart devops
+  tags:
+    - deploy
+
+- name: remove old deploys (keeping the two latest)
+  shell: "ls -tr /home/{{ user }}/devops_*.jar | head -n -2 | xargs rm -Rf"
+  tags:
+    - deploy
+

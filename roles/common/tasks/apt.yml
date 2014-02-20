@@ -13,3 +13,9 @@
   apt:
     pkg=vim
     state=installed
+
+- name: set filetype indent off
+  lineinfile:
+    dest=/etc/vim/vimrc
+    line='filetype indent off'
+    state=present

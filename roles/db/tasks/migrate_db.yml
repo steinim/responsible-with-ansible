@@ -1,0 +1,12 @@
+---
+- name: Copy db migration script
+  copy: src=migrate_db.sql dest=/tmp/migrate_db.sql
+  tags:
+    - deploy
+
+- name: Run db migration script
+  shell: "cat /tmp/migrate_db.sql | mysql -u{{ mysql_user }} -p{{ mysql_user_password }} -hlocalhost {{ mysql_user }}"
+  tags:
+    - deploy
+
+

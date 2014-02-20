@@ -1,7 +1,0 @@
-user: devops
-group: devops
-user_name: "Devops app user"
-password: $6$asdljfhasdjkhfka$N5LyeR5WWqWOAz3fGWfXh4YUUK8GMgrsWA0S6JkXaRZBH0p991.j2/UEJZ8y3pkglTpi8.9VOn.9tuca0Pbfp.
-db_user_password: devops123
-db_table_name: HELLO
-deploy_stamp: "{{ ansible_date_time['epoch'] }}"

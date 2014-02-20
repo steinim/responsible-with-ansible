@@ -3,6 +3,7 @@
 - hosts: dbservers
   roles:
     - common
+    - mysql
 
 - hosts: appservers
   roles:

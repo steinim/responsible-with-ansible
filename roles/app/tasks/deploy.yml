@@ -47,12 +47,7 @@
   tags:
     - deploy
 
-- name: install service
-  service:
-    name=devops
-    enabled=yes
-  tags:
-    - deploy
+# TODO: install devops as a service
 
 - name: copy config.properties
   template:
@@ -65,19 +60,6 @@
     - restart devops
   tags:
     - deploy
-
-#- name: download jar
-#  get_url:
-#    url="https://github.com/steinim/responsible-with-ansible/files/devops.jar"
-#    dest="/home/{{ user }}/devops_{{ deploy_stamp }}.jar"
-#    owner={{ user }}
-#    group={{ group }}
-#    mode=0644
-#  notify:
-#    - restart devops
-#  tags:
-#    - deploy
-
 
 - name: copy app jar
   copy:

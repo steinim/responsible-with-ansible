@@ -6,7 +6,8 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.box_url = "box/ubuntu-12.10.box"
+  #config.vm.box_url = "box/ubuntu-12.10.box"
+  config.vm.box_url = "http://morisbak.net/files/ubuntu-12.10.box"
   config.vm.box = "ubuntu-12.10"
   
 

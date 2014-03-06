@@ -1,3 +1,7 @@
+Tutorial slides are available here:
+===================================
+http://steinim.github.io/slides/responsible-with-ansible
+
 Install Ansible
 =============
 

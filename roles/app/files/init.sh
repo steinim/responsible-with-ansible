@@ -4,6 +4,8 @@ APP_HOME=/home/devops
 APP_JAR=current
 LOGS=$APP_HOME/logs
 
+mkdir -f $LOGS
+
 USR=$( whoami )
 
 PID=$( ps -ea -o "pid ppid args" | grep -v grep | grep "java -jar $APP_JAR" | sed -e 's/^  *//' -e 's/ .*//' | head -1 )

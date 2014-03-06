@@ -3,6 +3,8 @@
   apt:
     pkg=openjdk-7-jdk
     state=installed
+  tags:
+    - java
 
 - name: create log directory
   file:

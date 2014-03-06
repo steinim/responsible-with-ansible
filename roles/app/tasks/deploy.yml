@@ -3,37 +3,8 @@
   apt:
     pkg=openjdk-7-jdk
     state=installed
-
-- name: create log directory
-  file:
-    path="/home/{{ user }}/logs"
-    state=directory
-    owner={{ user }}
-    group={{ group }}
-    mode=0755
   tags:
-    - deploy
-
-- name: touch logs
-  command: "touch /home/{{ user }}/logs/{{ item }}"
-  with_items:
-    - stderr.log
-    - stdout.log
-  tags:
-    - deploy
-
-- name: set ownership and mode on logs
-  file:
-    path="/home/{{ user }}/logs/{{ item }}"
-    state=file
-    owner={{ user }}
-    group={{ group }}
-    mode=0600
-  with_items:
-    - stderr.log
-    - stdout.log
-  tags:
-    - deploy
+    - java
 
 - name: copy init script to server
   copy:

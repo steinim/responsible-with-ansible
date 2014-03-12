@@ -30,7 +30,7 @@ public class WebServerMain {
 		context.setContextPath("/");
 		server.setHandler(context);
 		ServletHolder h = new ServletHolder(new ServletContainer());
-		h.setInitParameter("com.sun.jersey.config.property.packages", "no.bekk.jersey");
+		h.setInitParameter("com.sun.jersey.config.property.packages", "no.bekk.jersey.resources");
 		h.setInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true");
 		context.addServlet(h, "/*");
 		try {

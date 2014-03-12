@@ -11,12 +11,11 @@ PID=$( ps -ea -o "pid ppid args" | grep -v grep | grep "java -jar $APP_JAR" | se
 _start() {
   if [ -z $PID ]; then
     echo "Starting devops..."
-    mkdir -p $LOGS
     cd $APP_HOME
     if [ "devops" = "$USR" ]; then
-      nohup java -jar $APP_JAR 1>$LOGS/stdout.log 2>$LOGS/stderr.log &
+      mkdir -p $LOGS ; nohup java -jar $APP_JAR 1>$LOGS/stdout.log 2>$LOGS/stderr.log &
     else
-      sudo su -l devops -c "nohup java -jar $APP_JAR 1>$LOGS/stdout.log 2>$LOGS/stderr.log &"
+      sudo su -l devops -c "mkdir -p $LOGS ; nohup java -jar $APP_JAR 1>$LOGS/stdout.log 2>$LOGS/stderr.log &"
     fi
     cd -
     echo "Started devops."

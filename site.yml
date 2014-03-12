@@ -2,14 +2,14 @@
 
 - hosts: dbservers
   roles:
-    #- common
+    - common
     - mysql
     - db
 
 - hosts: appservers
   serial: 1
   roles:
-    #- common
+    - common
     - users
     - app
 
@@ -17,6 +17,6 @@
   vars:
     - app_port: "1234"
   roles:
-    #- common
+    - common
     - nginx
 

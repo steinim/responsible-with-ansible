@@ -2,7 +2,8 @@
 - name: ensure installed nginx
   apt:
     pkg=nginx
-    state=installed
+    state=present
+    update_cache=no
 
 - name: Start nginx
   service:

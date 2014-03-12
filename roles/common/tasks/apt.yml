@@ -2,10 +2,16 @@
 
 - name: Update apt keys
   command: apt-key update
+  tags:
+    - apt
 
 - name: Update apt cache
   apt: update_cache=yes
+  tags:
+    - apt
 
 - name: Upgrade apt cache
   apt: upgrade=yes
+  tags:
+    - apt
 

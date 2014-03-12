@@ -14,10 +14,3 @@
     - { ip: '192.168.101.12', hostname: 'app2' }
     - { ip: '192.168.101.13', hostname: 'proxy' }
 
-- name: Add Google DNS server
-  lineinfile:
-    dest=/etc/resolvconf/resolv.conf.d/base
-    regexp="^nameserver 8.8.8.8$"
-    line="nameserver 8.8.8.8"
-    state=present
-

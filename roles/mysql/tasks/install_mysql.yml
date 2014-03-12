@@ -3,6 +3,7 @@
   apt:
     package="{{ item }}"
     state=present
+    update_cache=no
   with_items:
     - python-mysqldb
     - mysql-client

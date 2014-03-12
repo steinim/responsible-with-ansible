@@ -30,7 +30,7 @@ _stop() {
   if [ -z $PID ]; then
     echo "devops already stopped"
   else
-    kill $PID
+    sudo kill $PID
     unset PID
   fi
 }
